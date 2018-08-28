@@ -38,7 +38,12 @@ var Player = function() {
 };
 
 Player.prototype.update = function(dt) {
-	
+	// Check collision
+	for(let enemy of allEnemies) {
+		if(this.y === enemy.y && (enemy.x > this.x && enemy.x < this.x)) {
+			this.reset();
+		}
+	}
 };
 
 Player.prototype.render = function() {
@@ -48,23 +53,36 @@ Player.prototype.render = function() {
 Player.prototype.handleInput = function(dt) {
 	switch (dt) {
 		case "up": 
+		// prevents player from scrolling offscreen upwards
 		if (this.y > 0) {
 		this.y -= 50;
 		}
 		break;
 		case "down":
+		// prevents player from scrolling offscreen downwards
+		if (this.y < 50 * 8) {
 		this.y += 50;
+		}
 		break;
 		case "left": 
+		// prevents player from scrolling offscreen to the left
 		if (this.x > 0) {
 		this.x -= 50;
 		}
 		break;
 		case "right": 
+		// prevents player from scrolling offscreen to the right
+		if (this.x < 50 * 8) {
 		this.x += 50;
+		}
 		break;
 	}
-};
+}; 
+
+function reset() {
+	this.x = 0;
+	this.y = 0;
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
