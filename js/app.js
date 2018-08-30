@@ -5,6 +5,7 @@ var Enemy = function(x,y) {
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
+	// Enemy starting position
     this.sprite = 'images/enemy-bug.png';
 	this.x = x;
 	this.y = y;
@@ -33,17 +34,19 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 var Player = function() {
 	this.sprite = 'images/char-boy.png';
+	// Player's starting position
 	this.x = 200;
-	this.y = 350;
+	this.y = 400;
 };
 
 Player.prototype.update = function(dt) {
 	// Check collision
-	for(let enemy of allEnemies) {
-		if(this.y === enemy.y && (enemy.x > this.x && enemy.x < this.x)) {
-			this.reset();
-		}
-	}
+	for (let enemy of allEnemies) {
+    if (Math.abs(this.y - enemy.y) < 30 && Math.abs(this.x - enemy.x) < 30) {
+      this.x = 200;
+	  this.y = 400;
+    } 
+  }
 };
 
 Player.prototype.render = function() {
@@ -75,19 +78,19 @@ Player.prototype.handleInput = function(dt) {
 		if (this.x < 50 * 8) {
 		this.x += 50;
 		}
-		break;
-	}
+		break; 
+	} 
+	
 }; 
 
-function reset() {
-	this.x = 0;
-	this.y = 0;
-}
+
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+// Makes multiple enemies
 var allEnemies = [new Enemy(-200, 65), new Enemy(-150, 145), new Enemy(-100, 230)];
+// Draws the player on the board. 
 var player = new Player(); 
 
 
