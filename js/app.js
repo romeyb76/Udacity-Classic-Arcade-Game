@@ -19,7 +19,7 @@ Enemy.prototype.update = function(dt) {
     // all computers.
 	this.x += 1;
 	if (this.x > 500) {
-		this.x = -100;
+		this.x = 30;  // Controls speed of the enemies
 	}
 }; 
 
@@ -45,7 +45,13 @@ Player.prototype.update = function(dt) {
     if (Math.abs(this.y - enemy.y) < 30 && Math.abs(this.x - enemy.x) < 30) {
       this.x = 200;
 	  this.y = 400;
+	  alert('Ouch!');
     } 
+	// Did player win?
+	 if (this.y < 10) {
+    alert('You win!');
+    this.y = 410;
+	}
   }
 };
 
@@ -89,7 +95,7 @@ Player.prototype.handleInput = function(dt) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 // Makes multiple enemies
-var allEnemies = [new Enemy(-200, 65), new Enemy(-150, 145), new Enemy(-100, 230)];
+var allEnemies = [new Enemy(-200, 65), new Enemy(-150, 145), new Enemy(-100, 230), new Enemy(10, 65), new Enemy(25, 145), new Enemy(40, 230)];
 // Draws the player on the board. 
 var player = new Player(); 
 
